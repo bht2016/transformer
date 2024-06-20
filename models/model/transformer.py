@@ -12,7 +12,7 @@ from models.model.encoder import Encoder
 
 class Transformer(nn.Module):
 
-    def __init__(self, src_pad_idx, trg_pad_idx, trg_sos_idx, enc_voc_size, dec_voc_size, d_model, n_head, max_len,
+    def __init__(self, src_pad_idx, trg_pad_idx, trg_sos_idx, enc_voc_size, dec_voc_size, d_model, n_head, input_max_len, ouput_max_len,
                  ffn_hidden, n_layers, drop_prob, device):
         super().__init__()
         self.src_pad_idx = src_pad_idx
@@ -21,7 +21,7 @@ class Transformer(nn.Module):
         self.device = device
         self.encoder = Encoder(d_model=d_model,
                                n_head=n_head,
-                               max_len=max_len,
+                               max_len=input_max_len,
                                ffn_hidden=ffn_hidden,
                                enc_voc_size=enc_voc_size,
                                drop_prob=drop_prob,
@@ -30,7 +30,7 @@ class Transformer(nn.Module):
 
         self.decoder = Decoder(d_model=d_model,
                                n_head=n_head,
-                               max_len=max_len,
+                               max_len=ouput_max_len,
                                ffn_hidden=ffn_hidden,
                                dec_voc_size=dec_voc_size,
                                drop_prob=drop_prob,
